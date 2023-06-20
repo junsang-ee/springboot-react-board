@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @MappedSuperclass
 @EntityListeners(value = AuditingEntityListener.class)
-public abstract class ModificationLocalDateTimeEntity {
+public abstract class ModificationLocalDateTimeEntity extends CustomBaseIdEntity {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Column(nullable = false)
     @LastModifiedDate
