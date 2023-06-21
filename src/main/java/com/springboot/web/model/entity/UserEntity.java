@@ -15,7 +15,7 @@ import java.util.List;
 @Entity(name = "user")
 public class UserEntity extends CreationLocalDateTimeEntity {
     @Column(nullable = false)
-    private String name;
+    private String userName;
 
     @Column(nullable = false)
     private String password;
@@ -27,8 +27,8 @@ public class UserEntity extends CreationLocalDateTimeEntity {
     private List<BoardEntity> board;
 
     @Builder
-    public UserEntity(String name, String password, String email){
-        this.name = name;
+    public UserEntity(String userName, String password, String email){
+        this.userName = userName;
         this.password = password;
         this.email = email;
     }
