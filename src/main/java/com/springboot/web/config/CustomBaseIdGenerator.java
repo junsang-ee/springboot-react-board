@@ -8,13 +8,10 @@ import org.hibernate.id.UUIDGenerator;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.type.Type;
 
-import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.util.Properties;
 
-@Getter
-@MappedSuperclass
-public abstract class CustomBaseIdGenerator extends UUIDGenerator {
+public class CustomBaseIdGenerator extends UUIDGenerator {
     private String entityName;
 
     @Override
