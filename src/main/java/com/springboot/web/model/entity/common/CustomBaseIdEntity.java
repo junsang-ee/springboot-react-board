@@ -17,7 +17,7 @@ public class CustomBaseIdEntity implements Persistable<String> {
     @Id
     @Column(name = "id")
     @GeneratedValue(generator = "idGenerator")
-    @GenericGenerator(name="idGenerator", strategy = "com.spring.web.config.CustomBaseIdGenerator")
+    @GenericGenerator(name="idGenerator", strategy = "com.springboot.web.config.CustomBaseIdGenerator")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String id;
 
