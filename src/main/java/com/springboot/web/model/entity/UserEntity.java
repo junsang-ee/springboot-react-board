@@ -1,13 +1,12 @@
 package com.springboot.web.model.entity;
 
+import com.springboot.web.constants.Role;
 import com.springboot.web.model.entity.common.CreationLocalDateTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Getter
@@ -23,13 +22,18 @@ public class UserEntity extends CreationLocalDateTimeEntity {
     @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @OneToMany
     private List<BoardEntity> board;
 
     @Builder
-    public UserEntity(String userName, String password, String email){
+    public UserEntity(String userName, String password, String email, Role role){
         this.userName = userName;
         this.password = password;
+        this.role = role;
         this.email = email;
     }
 }
