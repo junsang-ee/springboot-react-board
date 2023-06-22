@@ -4,10 +4,7 @@ import com.springboot.web.model.dto.request.UserSaveRequest;
 import com.springboot.web.model.entity.UserEntity;
 import com.springboot.web.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/user")
@@ -19,4 +16,10 @@ public class UserController {
     public UserEntity save(@RequestBody UserSaveRequest request) {
         return userService.save(request);
     }
+
+    @GetMapping("user")
+    public void user() {}
+
+    @GetMapping("admin")
+    public void admin() {}
 }
