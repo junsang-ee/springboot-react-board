@@ -22,10 +22,15 @@ public class PostEntity extends AbstractPostEntity {
     private BoardEntity parentBoard;
 
     @Builder
-    public PostEntity(String title, String content, DisclosureStatusType disclosureStatusType, BoardEntity board) {
+    public PostEntity(String title,
+                      String content,
+                      DisclosureStatusType disclosureStatusType,
+                      BoardEntity board,
+                      UserEntity user) {
         this.title = title;
         this.content = content;
         this.parentBoard = board;
+        this.setCreatedBy(user);
         this.setDisclosureStatusType(disclosureStatusType);
     }
 }
