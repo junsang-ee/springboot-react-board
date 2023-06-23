@@ -1,7 +1,8 @@
 package com.springboot.web.model.entity;
 
 import com.springboot.web.constants.Role;
-import com.springboot.web.model.entity.common.CreationLocalDateTimeEntity;
+import com.springboot.web.model.entity.common.CreationTimestampEntity;
+import com.springboot.web.model.entity.common.ModificationTimestampEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Entity(name = "user")
-public class UserEntity extends CreationLocalDateTimeEntity {
+public class UserEntity extends ModificationTimestampEntity {
     @Column(nullable = false)
     private String userName;
 

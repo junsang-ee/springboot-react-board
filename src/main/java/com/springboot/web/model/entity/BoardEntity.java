@@ -16,10 +16,6 @@ public class BoardEntity extends AbstractBaseEntity {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by")
-    private UserEntity createdBy;
-
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private BoardActivationStatus status;
@@ -27,7 +23,7 @@ public class BoardEntity extends AbstractBaseEntity {
     @Builder
     public BoardEntity(String name, DisclosureStatusType disclosureStatusType, UserEntity user) {
         this.name = name;
-        this.createdBy = user;
+        this.setCreatedBy(user);
         if (disclosureStatusType != null)
             this.setDisclosureStatusType(disclosureStatusType);
     }
