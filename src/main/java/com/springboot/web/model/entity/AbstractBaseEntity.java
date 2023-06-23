@@ -16,7 +16,6 @@ public abstract class AbstractBaseEntity extends ModificationTimestampEntity {
     @Enumerated(EnumType.STRING)
     private DisclosureStatusType disclosureStatusType = DisclosureStatusType.PUBLIC;
 
-    @Column(nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by")
     private UserEntity createdBy;
