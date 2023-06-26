@@ -5,14 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.domain.Persistable;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @Getter
 @MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 public class CustomBaseIdEntity implements Persistable<String> {
     @Id
     @Column(name = "id")

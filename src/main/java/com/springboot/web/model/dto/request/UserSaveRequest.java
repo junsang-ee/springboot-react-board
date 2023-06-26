@@ -1,5 +1,6 @@
 package com.springboot.web.model.dto.request;
 
+import com.springboot.web.constants.Role;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,5 +12,7 @@ public class UserSaveRequest {
     private String password;
 
     private String email;
+
+    private Role role;
 
 }
