@@ -17,6 +17,11 @@ public class UserController {
         return userService.save(request);
     }
 
+    @GetMapping("/{userId}")
+    public UserEntity get(@PathVariable String userId) {
+        return userService.get(userId);
+    }
+
     @GetMapping("user")
     public void user() {}
 
