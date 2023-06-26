@@ -36,6 +36,9 @@ dependencies {
 
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
+
+    /* AOP */
+    compileOnly 'org.springframework.boot:spring-boot-starter-aop'
 }
 
 test {
