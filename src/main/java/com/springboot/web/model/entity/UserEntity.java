@@ -1,5 +1,6 @@
 package com.springboot.web.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springboot.web.constants.Role;
 import com.springboot.web.model.entity.common.ModificationTimestampEntity;
 import com.springboot.web.model.entity.count.FollowCountEntity;
@@ -8,12 +9,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @Entity(name = "user")
-public class UserEntity extends ModificationTimestampEntity {
+public class UserEntity extends ModificationTimestampEntity implements Serializable {
     @Column(nullable = false)
     private String userName;
 
@@ -31,8 +33,8 @@ public class UserEntity extends ModificationTimestampEntity {
     @OneToMany
     private List<BoardEntity> board;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "followCount")
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
     private FollowCountEntity followCount;
 
     @Builder

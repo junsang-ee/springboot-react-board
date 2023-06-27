@@ -18,7 +18,9 @@ public class UserServiceImpl implements UserService{
     @Transactional
     @Override
     public UserEntity save(UserSaveRequest request) {
-        return userRepository.save(getUserEntity(request));
+        UserEntity user = getUserEntity(request);
+        setUserInFollowCountEntity(user);
+        return userRepository.save(user);
     }
 
     @Override
@@ -40,6 +42,10 @@ public class UserServiceImpl implements UserService{
                 .role(request.getRole())
                 .followCount(new FollowCountEntity())
                 .build();
+    }
+
+    private void setUserInFollowCountEntity(UserEntity user) {
+        user.getFollowCount().setUser(user);
     }
 
 }
