@@ -14,8 +14,12 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor
-@Entity(name = "user")
+@Table(name = "user", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"userName"})
+})
+@Entity
 public class UserEntity extends ModificationTimestampEntity implements Serializable {
+
     @Column(nullable = false)
     private String userName;
 

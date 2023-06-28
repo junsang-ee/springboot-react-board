@@ -9,7 +9,8 @@ import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
-@Entity(name = "post")
+@Table(name = "post")
+@Entity
 public class PostEntity extends AbstractPostEntity {
     @Column(nullable = false)
     private String title;

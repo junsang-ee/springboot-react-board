@@ -10,7 +10,8 @@ import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
-@Entity(name = "board")
+@Table(name = "board")
+@Entity
 public class BoardEntity extends AbstractBaseEntity {
 
     @Column(nullable = false)

@@ -11,7 +11,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity(name = "follow_count")
+@Table(name = "follow_count")
+@Entity
 public class FollowCountEntity extends TimestampSequentialEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
