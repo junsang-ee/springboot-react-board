@@ -1,7 +1,9 @@
 package com.springboot.web.controller;
 
 import com.springboot.web.model.dto.request.UserSaveRequest;
+import com.springboot.web.model.dto.response.FollowSaveResponse;
 import com.springboot.web.model.entity.UserEntity;
+import com.springboot.web.service.FollowService;
 import com.springboot.web.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UserController {
     private final UserService userService;
+
+    private final FollowService followService;
 
     @PostMapping
     public UserEntity save(@RequestBody UserSaveRequest request) {
@@ -27,4 +31,9 @@ public class UserController {
 
     @GetMapping("admin")
     public void admin() {}
+
+    @PostMapping("/{userId}/follow")
+    public FollowSaveResponse follow(@PathVariable String userId) {
+        return followService.save("{login_user_id}", userId);
+    }
 }

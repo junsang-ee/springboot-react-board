@@ -1,5 +1,7 @@
 package com.springboot.web.service;
 
+import com.springboot.web.model.dto.response.FollowSaveResponse;
+
 public interface FollowService {
-    void save(String fromUser, String toUser);
+    FollowSaveResponse save(String fromUser, String toUser);
 }
