@@ -50,4 +50,10 @@ public class UserEntity extends ModificationTimestampEntity implements Serializa
         this.email = email;
         this.followCount = followCount;
     }
+
+    public void setFollowCount() {
+        this.followCount = FollowCountEntity.builder()
+                .user(this)
+                .build();
+    }
 }
