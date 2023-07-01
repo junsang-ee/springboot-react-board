@@ -2,9 +2,7 @@ package com.springboot.web.model.entity.count;
 
 import com.springboot.web.model.entity.UserEntity;
 import com.springboot.web.model.entity.common.TimestampSequentialEntity;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -27,5 +25,10 @@ public class FollowCountEntity extends TimestampSequentialEntity {
     public void onPrevisionPersist() {
         this.followerCount = 0;
         this.followingCount = 0;
+    }
+
+    @Builder
+    public FollowCountEntity(UserEntity user) {
+        this.user = user;
     }
 }
