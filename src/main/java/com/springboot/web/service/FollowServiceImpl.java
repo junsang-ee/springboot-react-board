@@ -23,10 +23,10 @@ public class FollowServiceImpl implements FollowService{
 
     private FollowEntity getFollowEntity(String fromUserId,
                                          String toUserId) {
-        FollowEntity result = new FollowEntity();
-        result.setFromUser(userService.get(fromUserId));
-        result.setToUser(userService.get(toUserId));
-        return result;
+        return FollowEntity.builder()
+                .fromUser(userService.get(fromUserId))
+                .toUser(userService.get(toUserId))
+                .build();
 
     }
 
