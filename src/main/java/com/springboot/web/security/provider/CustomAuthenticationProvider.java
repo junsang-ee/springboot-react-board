@@ -1,7 +1,7 @@
 package com.springboot.web.security.provider;
 
 import com.springboot.web.security.CustomUserDetails;
-import com.springboot.web.security.UserDetailsServiceImpl;
+import com.springboot.web.security.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -15,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Slf4j
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
-    private final UserDetailsServiceImpl userDetailsService;
+    private final CustomUserDetailsService customUserDetailsService;
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
@@ -23,8 +23,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         String username = token.getName();
         String password = (String) token.getCredentials();
-
-        CustomUserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        CustomUserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
 
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {
             throw new BadCredentialsException("BadCredentials");

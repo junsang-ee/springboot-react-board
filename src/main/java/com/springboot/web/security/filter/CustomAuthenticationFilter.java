@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword());
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
-            CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+            setDetails(request, authenticationToken);
             return authentication;
         } catch (IOException e) {
             log.error("authentication -> {}", e.getMessage());
