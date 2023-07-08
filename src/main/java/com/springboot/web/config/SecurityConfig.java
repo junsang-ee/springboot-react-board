@@ -1,7 +1,9 @@
 package com.springboot.web.config;
 
-import com.springboot.web.security.UserDetailsServiceImpl;
+import com.springboot.web.security.CustomUserDetailsService;
 import com.springboot.web.security.filter.CustomAuthenticationFilter;
+import com.springboot.web.security.handler.AuthFailureHandler;
+import com.springboot.web.security.handler.AuthSuccessHandler;
 import com.springboot.web.security.provider.CustomAuthenticationProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -20,15 +22,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final UserDetailsServiceImpl userDetailsService;
+    private final CustomUserDetailsService customUserDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final AuthSuccessHandler authSuccessHandler;
+    private final AuthFailureHandler authFailureHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .cors().disable()
                 .csrf().disable()
+                .httpBasic().disable()
+                .formLogin().disable()
         ;
 
         http
@@ -57,17 +63,11 @@ public class SecurityConfig {
     }
 
     public CustomAuthenticationProvider customAuthenticationProvider() {
-        return new CustomAuthenticationProvider(userDetailsService, passwordEncoder());
+        return new CustomAuthenticationProvider(customUserDetailsService, passwordEncoder());
     }
 
     public void customAuthenticationManagerBuilder(AuthenticationManagerBuilder authenticationManagerBuilder) {
         authenticationManagerBuilder.authenticationProvider(customAuthenticationProvider());
-    }
-
-    public CustomAuthenticationFilter customAuthenticationFilter() throws Exception {
-        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager(authenticationConfiguration));
-        customAuthenticationFilter.setFilterProcessesUrl("/login-process");
-        return customAuthenticationFilter;
     }
 
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
@@ -75,5 +75,12 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
+    public CustomAuthenticationFilter customAuthenticationFilter() throws Exception {
+        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager(authenticationConfiguration));
+        customAuthenticationFilter.setFilterProcessesUrl("/login-process");
+        customAuthenticationFilter.setAuthenticationSuccessHandler(authSuccessHandler);
+        customAuthenticationFilter.setAuthenticationFailureHandler(authFailureHandler);
+        return customAuthenticationFilter;
+    }
 
 }

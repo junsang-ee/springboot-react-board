@@ -1,0 +1,7 @@
+jwt:
+  secret: "b1eedb093787c3f807d7b5b2a7c041bcd466e7eda6e2e4s055bf8aa001300b2faa13976a08c3579980996991cec5a761644b58a2abff70dcad3d4fd90544654d"
+  prefix: "Bearer"
+  header: "Authorization"
+  access-expiration: 300000
+  refresh-expiration: 3600000
+  algorithm-name: "HS256"
