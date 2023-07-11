@@ -16,16 +16,16 @@ public class ReplyEntity extends AbstractPostEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parentPost", nullable = false)
-    private PostEntity paremtPost;
+    private PostEntity parentPost;
 
     @Builder
     public ReplyEntity(String content,
-                       PostEntity paremtPost,
+                       PostEntity parentPost,
                        String password,
                        DisclosureStatusType disclosureStatusType,
                        UserEntity createdBy) {
         this.content = content;
-        this.paremtPost = paremtPost;
+        this.parentPost = parentPost;
         this.setPassword(password);
         this.setDisclosureStatusType(disclosureStatusType);
         this.setCreatedBy(createdBy);
